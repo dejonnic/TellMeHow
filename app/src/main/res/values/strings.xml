@@ -5,6 +5,9 @@
     <string name="copyright">2017. 10. 27 at jeju developed by\nWhy are we showers on the 7th floor?</string>
     <string name="i_need_help">I need the help.</string>
     <string name="i_need_help_title">Let\'s google it</string>
+    <string name="name">Name</string>
+    <string name="material">Material :</string>
+    <string name="category">Category :</string>
     <array name="country_arrays">
         <item>United States</item>
         <item>Korea</item>

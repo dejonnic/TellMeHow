@@ -3,15 +3,19 @@ package com.hackerton.tellmehow;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 
 import com.hackerton.tellmehow.databinding.ActivityMainBinding;
 
 public class MainActivity extends Activity {
     private ActivityMainBinding binding;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -22,3 +26,6 @@ public class MainActivity extends Activity {
         });
     }
 }
+
+
+
