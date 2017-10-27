@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">tellmehow</string>
+    <string name="button_start">Start</string>
+    <string name="label_nationality">Nationality</string>
+    <string name="copyright">2017. 10. 27 at jeju developed by\nWhy are we showers on the 7th floor?</string>
+    <array name="country_arrays">
+        <item>United States</item>
+        <item>Korea</item>
+        <item>Canada</item>
+    </array>
 </resources>
