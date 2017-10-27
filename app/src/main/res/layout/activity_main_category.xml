@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+        <GridView
+            android:id="@+id/categories"
+            android:layout_above="@+id/help_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:layout_margin="10dp"
+            android:stretchMode="columnWidth"
+            android:numColumns="2" />
+        <Button
+            android:id="@+id/help_button"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/i_need_help"
+            android:textSize="14sp"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</layout>
