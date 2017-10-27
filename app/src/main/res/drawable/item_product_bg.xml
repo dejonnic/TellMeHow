@@ -5,7 +5,7 @@
         android:state_focused="false">
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
-            <stroke android:color="@android:color/white" android:width="2dp" />
+            <stroke android:color="@android:color/white" android:width="3dp" />
             <solid android:color="@android:color/white" />
         </shape>
     </item>
@@ -14,7 +14,7 @@
         android:state_focused="false">
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
-            <stroke android:color="@color/colorPrimary" android:width="2dp" />
+            <stroke android:color="@color/colorPrimary" android:width="3dp" />
             <solid android:color="@android:color/white" />
         </shape>
     </item>
@@ -23,7 +23,7 @@
         android:state_focused="true">
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
-            <stroke android:color="@color/colorPrimary" android:width="2dp" />
+            <stroke android:color="@color/colorPrimary" android:width="3dp" />
             <solid android:color="@android:color/white" />
         </shape>
     </item>

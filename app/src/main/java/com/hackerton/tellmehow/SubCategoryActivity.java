@@ -9,26 +9,25 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.hackerton.tellmehow.adapter.ProductCategoryAdapter;
-import com.hackerton.tellmehow.databinding.ActivityMainCategoryBinding;
+import com.hackerton.tellmehow.databinding.ActivitySubCategoryBinding;
 
-public class MainCategoryActivity extends Activity {
-    private ActivityMainCategoryBinding binding;
+public class SubCategoryActivity extends Activity {
+    private ActivitySubCategoryBinding binding;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main_category);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sub_category);
         binding.categories.setAdapter(new ProductCategoryAdapter(this));
         binding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainCategoryActivity.this, SubCategoryActivity.class);
-                startActivity(intent);
+
             }
         });
 
         binding.helpButton.setOnClickListener((v) -> {
-            Intent intent = new Intent(MainCategoryActivity.this, HelpActivity.class);
+            Intent intent = new Intent(SubCategoryActivity.this, HelpActivity.class);
             startActivity(intent);
         });
     }
