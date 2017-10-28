@@ -22,8 +22,9 @@ import com.hackerton.tellmehow.adapter.ProductCategoryAdapter;
 import com.hackerton.tellmehow.databinding.ActivityMainCategoryBinding;
 
 public class MainCategoryActivity extends Activity {
-    public static String CategoryNameKey = "CategoryName";
-    public static String CategoryIdKey = "CategoryId";
+    public final static String CategoryNameKey = "CategoryName";
+    public final static String CategoryIdKey = "CategoryId";
+    public final static String ProductCodeKey = "ProductCode";
     private ActivityMainCategoryBinding binding;
 
     @Override
@@ -75,9 +76,7 @@ public class MainCategoryActivity extends Activity {
                             }
                         });
                 builder.create().show();
-
             }
-
         });
     }
 
@@ -88,8 +87,9 @@ public class MainCategoryActivity extends Activity {
             String re = scanResult.getContents();
             Log.d("Result", re);
             // Start Product Detail Activity
-            //Intent intentProduct = new Intent(MainCategoryActivity.this, ProductRecycleInfoActivity.class);
-            //startActivity(intentProduct);
+            Intent intentProduct = new Intent(MainCategoryActivity.this, ProductRecycleInfoActivity.class);
+            intentProduct.putExtra(ProductCodeKey, re);
+            startActivity(intentProduct);
         }
         else {
             // else continue with any other code you need in the method
