@@ -56,33 +56,11 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/component_category_area"
-                    android:layout_below="@id/component_material_area"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/category"
-                        android:textColor="@color/textItem"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/main_component_category"
-                        android:textColor="@color/textItem"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
                 <TextView
                     android:id="@+id/recycle_info"
+                    android:layout_below="@id/component_material_area"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@id/component_category_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

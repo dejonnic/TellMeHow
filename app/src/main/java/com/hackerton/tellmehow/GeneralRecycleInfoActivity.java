@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ExpandableListAdapter;
@@ -22,6 +24,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.hackerton.tellmehow.APIResponses.RecycleInfoMainComponentResponse;
 import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
+import com.hackerton.tellmehow.adapter.CategoryIconManager;
 import com.hackerton.tellmehow.adapter.MinorComponentsRecycleInfoExpandableListAdapter;
 import com.hackerton.tellmehow.databinding.ActivityGeneralRecycleInfoBinding;
 import com.hackerton.tellmehow.view.AddComponentDialog;
@@ -50,7 +53,16 @@ public class GeneralRecycleInfoActivity extends Activity {
         String firstKeyName = myIntent.getStringExtra(MainCategoryActivity.CategoryNameKey);
         String secondKeyName = myIntent.getStringExtra(SubCategoryActivity.SubCategoryNameKey);
 
-        new PostAsync().execute(materialName, firstKeyName, categoryName, secondKeyName);
+        int categoryId = myIntent.getIntExtra(MainCategoryActivity.CategoryIdKey, -1);
+        int materialId = myIntent.getIntExtra(SubCategoryActivity.SubCategoryIdKey, -1);
+
+        new Requester().execute(materialName, firstKeyName, categoryName, secondKeyName);
+
+        Drawable materialIcon = ContextCompat.getDrawable(this.getApplicationContext(), CategoryIconManager.getIcon(materialId, categoryId));
+        binding.icon.setImageDrawable(materialIcon);
+
+        binding.mainComponentName.setText(firstKeyName);
+        binding.mainComponentMaterial.setText(secondKeyName);
 
         binding.componentButton.setOnClickListener((v) -> {
             AddComponentDialog dialog = new AddComponentDialog(GeneralRecycleInfoActivity.this);
@@ -68,8 +80,12 @@ public class GeneralRecycleInfoActivity extends Activity {
         });
     }
 
-    class PostAsync extends AsyncTask<String, String, JSONObject> {
+    class Requester extends AsyncTask<String, String, JSONObject> {
         JSONParser jsonParser = new JSONParser();
+
+        public Requester(){
+
+        }
 
         private ProgressDialog pDialog;
 
@@ -150,9 +166,9 @@ public class GeneralRecycleInfoActivity extends Activity {
 
         private void PopulateView(RecycleInfoMainComponentResponse recycleInfo) {
             // Main component details
-            binding.mainComponentName.setText(recycleInfo.name);
-            binding.mainComponentMaterial.setText(recycleInfo.material);
-            binding.mainComponentCategory.setText(recycleInfo.category);
+//            binding.mainComponentName.setText(recycleInfo.name);
+//            binding.mainComponentMaterial.setText(recycleInfo.material);
+            binding.recycleInfo.setText(recycleInfo.recycleInformation);
 
             //Other components details
             expandableListTitle = new ArrayList<String>();

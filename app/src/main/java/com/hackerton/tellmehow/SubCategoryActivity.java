@@ -40,6 +40,7 @@ public class SubCategoryActivity extends Activity {
                     int subCategoryId = item.getId();
 
                     Intent intent = new Intent(SubCategoryActivity.this, GeneralRecycleInfoActivity.class);
+                    intent.putExtra(MainCategoryActivity.CategoryNameKey, firstKeyName);
                     intent.putExtra(MainCategoryActivity.CategoryIdKey, categoryId);
                     intent.putExtra(SubCategoryNameKey, name.getText().toString());
                     intent.putExtra(SubCategoryIdKey, subCategoryId);
