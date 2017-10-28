@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.hackerton.tellmehow.adapter.ProductCategoryAdapter;
 import com.hackerton.tellmehow.databinding.ActivityMainCategoryBinding;
 
 public class MainCategoryActivity extends Activity {
+    public static String CategoryNameKey = "CategoryName";
     private ActivityMainCategoryBinding binding;
 
     @Override
@@ -22,7 +25,9 @@ public class MainCategoryActivity extends Activity {
         binding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView name = (TextView) view.getTag(R.id.text);
                 Intent intent = new Intent(MainCategoryActivity.this, SubCategoryActivity.class);
+                intent.putExtra(CategoryNameKey,name.getText().toString());
                 startActivity(intent);
             }
         });

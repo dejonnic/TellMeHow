@@ -6,6 +6,9 @@
     <string name="i_need_help">I need the help.</string>
     <string name="i_need_help_title">Let\'s google it</string>
     <string name="more_trash">I have more trash</string>
+    <string name="name">Name</string>
+    <string name="material">Material :</string>
+    <string name="category">Category :</string>
     <array name="country_arrays">
         <item>United States</item>
         <item>Korea</item>
