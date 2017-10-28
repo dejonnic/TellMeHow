@@ -24,6 +24,7 @@ import com.hackerton.tellmehow.APIResponses.RecycleInfoMainComponentResponse;
 import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
 import com.hackerton.tellmehow.adapter.MinorComponentsRecycleInfoExpandableListAdapter;
 import com.hackerton.tellmehow.databinding.ActivityGeneralRecycleInfoBinding;
+import com.hackerton.tellmehow.view.AddComponentDialog;
 
 
 public class GeneralRecycleInfoActivity extends Activity {
@@ -50,6 +51,15 @@ public class GeneralRecycleInfoActivity extends Activity {
         String secondKeyName = myIntent.getStringExtra(SubCategoryActivity.SubCategoryNameKey);
 
         new PostAsync().execute(materialName, firstKeyName, categoryName, secondKeyName);
+
+        binding.componentButton.setOnClickListener((v) -> {
+            AddComponentDialog dialog = new AddComponentDialog(getApplicationContext());
+            dialog.setDoneListener(() -> {
+                Toast.makeText(getApplicationContext(), "Saved new materials", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
 
         binding.moreTrashButton.setOnClickListener((v) -> {
             Intent intent = new Intent(GeneralRecycleInfoActivity.this, MainCategoryActivity.class);
