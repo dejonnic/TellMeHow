@@ -19,7 +19,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".MainCategoryActivity" />
         <activity android:name=".SubCategoryActivity" />
-        <activity android:name=".InformationActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".GeneralRecycleInfoActivity"/>
     </application>
