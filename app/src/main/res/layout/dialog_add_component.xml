@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="10dp"
-                    android:text="@string/label_material" />
+                    android:text="@string/label_information" />
                 <EditText
                     android:id="@+id/description_field"
                     android:layout_width="match_parent"
