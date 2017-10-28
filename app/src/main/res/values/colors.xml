@@ -6,4 +6,6 @@
     <color name="background">#EBECEB</color>
     <color name="textItem">#000000</color>
     <color name="textSub">#777777</color>
+    <color name="textFeedback">#0D7263</color>
+    <color name="bgFeedback">#B3DBD5</color>
 </resources>

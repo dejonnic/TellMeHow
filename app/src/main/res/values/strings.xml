@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">tellmehow</string>
     <string name="button_start">Start</string>
+    <string name="button_add_feedback">Add your feedback</string>
     <string name="label_nationality">Nationality</string>
     <string name="copyright">2017. 10. 27 at jeju developed by\nWhy are we showers on the 7th floor?</string>
     <string name="i_need_help">I need the help.</string>
