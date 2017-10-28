@@ -27,14 +27,10 @@ public class SubCategoryActivity extends Activity {
         binding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
-                Intent intent = new Intent(SubCategoryActivity.this, InformationActivity.class);
-=======
                 TextView name = (TextView) view.getTag(R.id.text);
                 Intent intent = new Intent(SubCategoryActivity.this, GeneralRecycleInfoActivity.class);
                 intent.putExtra(MainCategoryActivity.CategoryNameKey,firstKeyName);
                 intent.putExtra(SubCategoryNameKey,name.getText().toString());
->>>>>>> e98f02b44911fe6448831a660cda50a1d3584821
                 startActivity(intent);
             }
         });

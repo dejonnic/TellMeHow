@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.hackerton.tellmehow.adapter.ProductCategoryAdapter;
 import com.hackerton.tellmehow.databinding.ActivityMainCategoryBinding;
 
@@ -36,5 +38,29 @@ public class MainCategoryActivity extends Activity {
             Intent intent = new Intent(MainCategoryActivity.this, HelpActivity.class);
             startActivity(intent);
         });
+
+        binding.imageRecognitionButton.setOnClickListener((v) -> {
+            IntentIntegrator integrator = new IntentIntegrator(MainCategoryActivity.this);
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            integrator.setPrompt("Scan a barcode");
+            integrator.setResultDisplayDuration(0);
+            integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
+            integrator.initiateScan();
+
+        });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            // handle scan result
+            String re = scanResult.getContents();
+            Log.d("Result is here!", re);
+            // Start Product Detail Activity
+            //Intent intentProduct = new Intent(MainCategoryActivity.this, ProductRecycleInfoActivity.class);
+            //startActivity(intentProduct);
+        }
+        // else continue with any other code you need in the method
+        /* TODO : no result message */
     }
 }
