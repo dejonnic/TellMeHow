@@ -6,11 +6,7 @@ public class CategoryIconManager {
     public static int getIcon(int materialId, int categoryId) {
         switch (materialId){
             case 1:
-                if(categoryId == 1) {
-                    return R.drawable.prod_ic_glass_bottle;
-                } else {
-                    return R.drawable.prod_ic_household_glass;
-                }
+                return R.drawable.prod_ic_glass_bottle;
             case 2:
                 return R.drawable.prod_ic_metal_can;
             case 3:
@@ -29,7 +25,7 @@ public class CategoryIconManager {
                 return R.drawable.prod_ic_household_light;
             case 8:
                 return R.drawable.prod_ic_wearable_cloth;
-            case 10:
+
                 return R.drawable.prod_ic_electronic;
             default:
                 return R.drawable.prod_ic_null;
