@@ -106,7 +106,7 @@ public class ProductRecycleInfoActivity extends Activity {
 
                 JSONObject json = jsonParser.makeHttpRequest(url, "GET", null);
 
-                if (json != null) {
+                if (json != null && json.length() > 0) {
                     Log.d("JSON result", json.toString());
 
                     return json;
@@ -128,6 +128,11 @@ public class ProductRecycleInfoActivity extends Activity {
                 Gson gson = new Gson();
                 PicturedComponentResponse recycleInfo = gson.fromJson(json.toString(), PicturedComponentResponse.class);
                 PopulateView(recycleInfo);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), R.string.no_result_database, Toast.LENGTH_LONG).show();
+
+                finish();
             }
         }
 

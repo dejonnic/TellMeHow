@@ -11,22 +11,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MainCategoryActivity" />
-        <activity android:name=".SubCategoryActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainCategoryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SubCategoryActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hackerton.tellmehow.MainCategoryActivity" />
         </activity>
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".GeneralRecycleInfoActivity"/>
-        <activity android:name=".ProductRecycleInfoActivity"/>
+        <activity android:name=".HelpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".GeneralRecycleInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ProductRecycleInfoActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

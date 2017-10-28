@@ -18,6 +18,7 @@
     <string name="camera_permission_rationale">This app has a great feature based on barcode recognition. If you want to enable it, give the app access permission to the camera in the phone settings.</string>
     <string name="permission_needed">Permission Needed</string>
     <string name="no_scan_results">No scanning result</string>
+    <string name="no_result_database">No result from database</string>
     <array name="country_arrays">
         <item>United States</item>
         <item>Korea</item>

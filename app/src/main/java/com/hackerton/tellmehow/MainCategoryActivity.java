@@ -63,7 +63,6 @@ public class MainCategoryActivity extends Activity {
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
                 integrator.setPrompt("Scan a barcode");
                 integrator.setResultDisplayDuration(0);
-                integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
                 integrator.initiateScan();
             }
             else {
@@ -82,7 +81,7 @@ public class MainCategoryActivity extends Activity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult != null && scanResult.getContents() != null ) {
+        if (scanResult != null && scanResult.getContents() != null && !scanResult.getContents().isEmpty() ) {
             // handle scan result
             String re = scanResult.getContents();
             Log.d("Result", re);

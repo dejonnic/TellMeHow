@@ -26,7 +26,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_centerHorizontal="true"
-                    android:text="Milk Bottle"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="18sp" />
