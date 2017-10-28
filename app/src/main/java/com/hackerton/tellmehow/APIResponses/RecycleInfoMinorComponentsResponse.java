@@ -1,4 +1,4 @@
-package com.hackerton.tellmehow;
+package com.hackerton.tellmehow.APIResponses;
 
 import com.google.gson.annotations.SerializedName;
 

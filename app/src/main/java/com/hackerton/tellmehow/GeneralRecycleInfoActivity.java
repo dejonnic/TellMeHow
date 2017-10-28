@@ -6,14 +6,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.gson.Gson;
+import com.hackerton.tellmehow.APIResponses.RecycleInfoMainComponentResponse;
+import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
+import com.hackerton.tellmehow.adapter.MinorComponentsRecycleInfoExpandableListAdapter;
 
 
 public class GeneralRecycleInfoActivity extends AppCompatActivity {
@@ -26,11 +33,21 @@ public class GeneralRecycleInfoActivity extends AppCompatActivity {
     private TextView materialTextView;
     private TextView categoryTextView;
 
+    private ExpandableListView expandableListView;
+    private ExpandableListAdapter expandableListAdapter;
+    private List<String> expandableListTitle;
+    private HashMap<String, List<String>> expandableListDetail;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_recycle_info);
+
+        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListTitle = new ArrayList<String>();
+        expandableListAdapter = new MinorComponentsRecycleInfoExpandableListAdapter(this, expandableListTitle, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
 
         nameTextView = (TextView) findViewById(R.id.main_component_name);
         materialTextView = (TextView) findViewById(R.id.main_component_material);
@@ -130,9 +147,30 @@ public class GeneralRecycleInfoActivity extends AppCompatActivity {
         }
 
         private void PopulateView(RecycleInfoMainComponentResponse recycleInfo) {
+            // Main component details
             nameTextView.setText(recycleInfo.name);
             materialTextView.setText(recycleInfo.material);
             categoryTextView.setText(recycleInfo.category);
+
+            //Other components details
+            expandableListTitle = new ArrayList<String>();
+            expandableListDetail = new HashMap<String, List<String>>();
+
+            for (RecycleInfoMinorComponentsResponse response : recycleInfo.recycleInfoMinorComponentsResponses) {
+                // name, recycle_info, material
+                String headerName = response.name + "-" + response.material;
+                expandableListTitle.add(headerName);
+                List<String> newComponentDetails = new ArrayList<String>();
+                newComponentDetails.add(recycleInfo.recycleInformation);
+
+                expandableListDetail.put(headerName, newComponentDetails);
+
+                Log.d("Minor Component", headerName + " " + response.recycleInformation);
+            }
+
+            ((MinorComponentsRecycleInfoExpandableListAdapter)expandableListAdapter).updateAdapter(expandableListTitle, expandableListDetail);
+
+
         }
     }
 

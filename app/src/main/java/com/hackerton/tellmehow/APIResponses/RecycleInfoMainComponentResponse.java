@@ -1,6 +1,7 @@
-package com.hackerton.tellmehow;
+package com.hackerton.tellmehow.APIResponses;
 
 import com.google.gson.annotations.SerializedName;
+import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
 
 import java.util.List;
 
