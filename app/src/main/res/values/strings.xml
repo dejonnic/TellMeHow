@@ -6,7 +6,7 @@
     <string name="add_component_title">New material</string>
     <string name="label_nationality">Nationality</string>
     <string name="label_information">Information</string>
-    <string name="label_material">Information</string>
+    <string name="label_material">Material Name</string>
     <string name="copyright">2017. 10. 27 at jeju developed by\nWhy are we showers on the 7th floor?</string>
     <string name="i_need_help">I need the help.</string>
     <string name="i_need_help_title">Let\'s google it</string>
