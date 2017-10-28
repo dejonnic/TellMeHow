@@ -78,7 +78,6 @@ public class GeneralRecycleInfoActivity extends Activity {
         private static final String TAG_SUCCESS = "status";
         private static final String TAG_MESSAGE = "message";
 
-
         @Override
         protected void onPreExecute() {
             pDialog = new ProgressDialog(GeneralRecycleInfoActivity.this);
@@ -172,78 +171,8 @@ public class GeneralRecycleInfoActivity extends Activity {
             }
 
             ((MinorComponentsRecycleInfoExpandableListAdapter)expandableListAdapter).updateAdapter(expandableListTitle, expandableListDetail);
-
-
         }
     }
-
-        class GetAsync extends AsyncTask<String, String, JSONObject> {
-
-            JSONParser jsonParser = new JSONParser();
-
-            private ProgressDialog pDialog;
-
-            private static final String LOGIN_URL = "http://www.nooo";
-
-            private static final String TAG_SUCCESS = "status";
-            private static final String TAG_MESSAGE = "message";
-
-            @Override
-            protected void onPreExecute() {
-                pDialog = new ProgressDialog(GeneralRecycleInfoActivity.this);
-                pDialog.setMessage("Attempting login...");
-                pDialog.setIndeterminate(false);
-                pDialog.setCancelable(true);
-                pDialog.show();
-            }
-
-            @Override
-            protected JSONObject doInBackground(String... args) {
-                try {
-                    HashMap<String, String> params = new HashMap<>();
-                    params.put("name", args[0]);
-                    params.put("password", args[1]);
-
-                    Log.d("request", "starting");
-
-                    JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "GET", params);
-
-                    if (json != null) {
-                        Log.d("JSON result", json.toString());
-
-                        return json;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            protected void onPostExecute(JSONObject json) {
-
-                int success = 0;
-                String message = "";
-
-                if (pDialog != null && pDialog.isShowing()) {
-                    pDialog.dismiss();
-                }
-
-                if (json != null) {
-                    Toast.makeText(GeneralRecycleInfoActivity.this, json.toString(),
-                            Toast.LENGTH_LONG).show();
-
-                    success = json.optInt(TAG_SUCCESS);
-                    message = json.optString(TAG_MESSAGE);
-
-                    if (success == 1) {
-                        Log.d("Success!", message);
-                    } else {
-                        Log.d("Failure", message);
-                    }
-                }
-            }
-        }
 }
 
 
