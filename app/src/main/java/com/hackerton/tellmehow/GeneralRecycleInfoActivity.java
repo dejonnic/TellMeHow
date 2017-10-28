@@ -8,11 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -22,8 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.hackerton.tellmehow.APIResponses.RecycleInfoMainComponentResponse;
+import com.hackerton.tellmehow.APIResponses.NestedRecycleInfoMainComponentResponse;
 import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
+import com.hackerton.tellmehow.APIResponses.RecycleInfoResponse;
 import com.hackerton.tellmehow.adapter.CategoryIconManager;
 import com.hackerton.tellmehow.adapter.MinorComponentsRecycleInfoExpandableListAdapter;
 import com.hackerton.tellmehow.databinding.ActivityGeneralRecycleInfoBinding;
@@ -56,7 +54,7 @@ public class GeneralRecycleInfoActivity extends Activity {
         int categoryId = myIntent.getIntExtra(MainCategoryActivity.CategoryIdKey, -1);
         int materialId = myIntent.getIntExtra(SubCategoryActivity.SubCategoryIdKey, -1);
 
-        new Requester().execute(materialName, firstKeyName, categoryName, secondKeyName);
+        new Requester(categoryId, materialId).execute(materialName, firstKeyName, categoryName, secondKeyName);
 
         Drawable materialIcon = ContextCompat.getDrawable(this.getApplicationContext(), CategoryIconManager.getIcon(materialId, categoryId));
         binding.icon.setImageDrawable(materialIcon);
@@ -82,14 +80,17 @@ public class GeneralRecycleInfoActivity extends Activity {
 
     class Requester extends AsyncTask<String, String, JSONObject> {
         JSONParser jsonParser = new JSONParser();
+        private int categoryId;
+        private int materialId;
+        private String url;
 
-        public Requester(){
-
+        public Requester(int categoryId, int materialId){
+            this.categoryId = categoryId;
+            this.materialId = materialId;
+            url = "http://128.199.69.81:8000/api/v1/category/component/" + materialId + "/?category=" + categoryId;
         }
 
         private ProgressDialog pDialog;
-
-        private static final String LOGIN_URL = "http://www.mocky.io/v2/59f3ac333200006f1ea62655";
 
         private static final String TAG_SUCCESS = "status";
         private static final String TAG_MESSAGE = "message";
@@ -107,17 +108,9 @@ public class GeneralRecycleInfoActivity extends Activity {
         protected JSONObject doInBackground(String... args) {
 
             try {
-
-                HashMap<String, String> params = new HashMap<>();
-                int i = 0;
-                for (i = 0; i < args.length; i++) {
-                    params.put(args[i], args[++i]);
-                }
-
                 Log.d("request", "starting");
 
-                JSONObject json = jsonParser.makeHttpRequest(
-                        LOGIN_URL, "POST", params);
+                JSONObject json = jsonParser.makeHttpRequest(url, "GET", null);
 
                 if (json != null) {
                     Log.d("JSON result", json.toString());
@@ -133,54 +126,33 @@ public class GeneralRecycleInfoActivity extends Activity {
         }
 
         protected void onPostExecute(JSONObject json) {
-
-            int success = 0;
-            String message = "";
-
             if (pDialog != null && pDialog.isShowing()) {
                 pDialog.dismiss();
             }
 
             if (json != null) {
-                success = json.optInt(TAG_SUCCESS);
-                message = json.optString(TAG_MESSAGE);
-
                 Gson gson = new Gson();
-
-                if (success == 1) {
-                    Log.d("Success!", message);
-                    RecycleInfoMainComponentResponse recycleInfo = gson.fromJson(json.toString(), RecycleInfoMainComponentResponse.class);
-                    Log.d("Response", recycleInfo.name + recycleInfo.category + recycleInfo.material + recycleInfo.recycleInformation);
-
-                    for (RecycleInfoMinorComponentsResponse response : recycleInfo.recycleInfoMinorComponentsResponses) {
-                        Log.d("Minor Component", response.name + response.material + response.recycleInformation);
-                    }
-
-                    PopulateView(recycleInfo);
-
-                } else {
-                    Log.d("Failure", message);
-                }
+                RecycleInfoResponse recycleInfo = gson.fromJson(json.toString(), RecycleInfoResponse.class);
+                PopulateView(recycleInfo);
             }
         }
 
-        private void PopulateView(RecycleInfoMainComponentResponse recycleInfo) {
+        private void PopulateView(RecycleInfoResponse recycleInfo) {
             // Main component details
 //            binding.mainComponentName.setText(recycleInfo.name);
 //            binding.mainComponentMaterial.setText(recycleInfo.material);
-            binding.recycleInfo.setText(recycleInfo.recycleInformation);
+            binding.recycleInfo.setText(recycleInfo.component.recycleInformation);
 
             //Other components details
             expandableListTitle = new ArrayList<String>();
             expandableListDetail = new HashMap<String, List<String>>();
 
-            for (RecycleInfoMinorComponentsResponse response : recycleInfo.recycleInfoMinorComponentsResponses) {
+            for (RecycleInfoMinorComponentsResponse response : recycleInfo.component.recycleInfoMinorComponentsResponses) {
                 // name, recycle_info, material
                 String headerName = response.name + "-" + response.material;
                 expandableListTitle.add(headerName);
                 List<String> newComponentDetails = new ArrayList<String>();
-                newComponentDetails.add(recycleInfo.recycleInformation);
-
+                newComponentDetails.add(response.recycleInformation);
                 expandableListDetail.put(headerName, newComponentDetails);
 
                 Log.d("Minor Component", headerName + " " + response.recycleInformation);

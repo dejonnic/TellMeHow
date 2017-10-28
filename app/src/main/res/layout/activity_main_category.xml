@@ -6,6 +6,7 @@
         android:background="@color/background">
         <GridView
             android:id="@+id/categories"
+            android:layout_above="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:verticalSpacing="10dp"
@@ -13,7 +14,6 @@
             android:layout_margin="10dp"
             android:stretchMode="columnWidth"
             android:numColumns="2"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
