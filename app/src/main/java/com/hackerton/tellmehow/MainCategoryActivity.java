@@ -1,14 +1,20 @@
 package com.hackerton.tellmehow;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -47,27 +53,47 @@ public class MainCategoryActivity extends Activity {
         });
 
         binding.imageRecognitionButton.setOnClickListener((v) -> {
-            IntentIntegrator integrator = new IntentIntegrator(MainCategoryActivity.this);
-            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            integrator.setPrompt("Scan a barcode");
-            integrator.setResultDisplayDuration(0);
-            integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
-            integrator.initiateScan();
+
+            // lauch scan only if camera access permission is granted
+            if (ContextCompat.checkSelfPermission(MainCategoryActivity.this,
+                    Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                IntentIntegrator integrator = new IntentIntegrator(MainCategoryActivity.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+                integrator.setPrompt("Scan a barcode");
+                integrator.setResultDisplayDuration(0);
+                integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
+                integrator.initiateScan();
+            }
+            else {
+                // permission is not granted, functionnality is disabled
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.permission_needed)
+                        .setMessage(R.string.camera_permission_rationale)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        });
+                builder.create().show();
+
+            }
 
         });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult != null) {
+        if (scanResult != null && scanResult.getContents() != null ) {
             // handle scan result
             String re = scanResult.getContents();
-            Log.d("Result is here!", re);
+            Log.d("Result", re);
             // Start Product Detail Activity
             //Intent intentProduct = new Intent(MainCategoryActivity.this, ProductRecycleInfoActivity.class);
             //startActivity(intentProduct);
         }
-        // else continue with any other code you need in the method
-        /* TODO : no result message */
+        else {
+            // else continue with any other code you need in the method
+            Toast.makeText(getApplicationContext(), R.string.no_scan_results, Toast.LENGTH_SHORT);
+        }
     }
 }
