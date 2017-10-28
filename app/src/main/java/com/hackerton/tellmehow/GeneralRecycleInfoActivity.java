@@ -53,7 +53,7 @@ public class GeneralRecycleInfoActivity extends Activity {
         new PostAsync().execute(materialName, firstKeyName, categoryName, secondKeyName);
 
         binding.componentButton.setOnClickListener((v) -> {
-            AddComponentDialog dialog = new AddComponentDialog(getApplicationContext());
+            AddComponentDialog dialog = new AddComponentDialog(GeneralRecycleInfoActivity.this);
             dialog.setDoneListener(() -> {
                 Toast.makeText(getApplicationContext(), "Saved new materials", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
