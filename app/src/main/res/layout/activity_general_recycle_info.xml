@@ -99,23 +99,23 @@
                     android:dividerHeight="0.5dp" />
 
                 <Button
-                    android:id="@+id/feedback_button"
+                    android:id="@+id/component_button"
                     android:layout_below="@id/expandableListView"
                     android:layout_marginTop="10dp"
                     android:layout_width="130dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/feedback_button"
+                    android:background="@drawable/component_button"
                     android:textAllCaps="false"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:text="@string/button_add_feedback"
+                    android:text="@string/button_add_component"
                     android:textColor="@color/textFeedback"
                     android:textSize="12sp" />
 
                 <ImageView
                     android:id="@+id/tree_image"
                     android:src="@drawable/trees"
-                    android:layout_below="@id/feedback_button"
+                    android:layout_below="@id/component_button"
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
