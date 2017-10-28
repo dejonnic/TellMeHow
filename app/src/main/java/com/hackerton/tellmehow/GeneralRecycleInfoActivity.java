@@ -1,7 +1,9 @@
 package com.hackerton.tellmehow;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,45 +23,49 @@ import com.google.gson.Gson;
 import com.hackerton.tellmehow.APIResponses.RecycleInfoMainComponentResponse;
 import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
 import com.hackerton.tellmehow.adapter.MinorComponentsRecycleInfoExpandableListAdapter;
+import com.hackerton.tellmehow.databinding.ActivityGeneralRecycleInfoBinding;
+import com.hackerton.tellmehow.view.AddComponentDialog;
 
 
-public class GeneralRecycleInfoActivity extends AppCompatActivity {
-
+public class GeneralRecycleInfoActivity extends Activity {
     private String materialName = "material";
     private String categoryName = "category";
 
-    String url = "http://search.twitter.com/search.json?q=javacodegeeks";
-    private TextView nameTextView;
-    private TextView materialTextView;
-    private TextView categoryTextView;
+    ActivityGeneralRecycleInfoBinding binding;
 
-    private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_recycle_info);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_general_recycle_info);
 
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListTitle = new ArrayList<String>();
         expandableListAdapter = new MinorComponentsRecycleInfoExpandableListAdapter(this, expandableListTitle, expandableListDetail);
-        expandableListView.setAdapter(expandableListAdapter);
-
-        nameTextView = (TextView) findViewById(R.id.main_component_name);
-        materialTextView = (TextView) findViewById(R.id.main_component_material);
-        categoryTextView = (TextView) findViewById(R.id.main_component_category);
+        binding.expandableListView.setAdapter(expandableListAdapter);
 
         Intent myIntent = getIntent();
         String firstKeyName = myIntent.getStringExtra(MainCategoryActivity.CategoryNameKey);
         String secondKeyName = myIntent.getStringExtra(SubCategoryActivity.SubCategoryNameKey);
 
-        //Log.d("RecycleInfo", firstKeyName + " " + secondKeyName);
-
         new PostAsync().execute(materialName, firstKeyName, categoryName, secondKeyName);
+
+        binding.componentButton.setOnClickListener((v) -> {
+            AddComponentDialog dialog = new AddComponentDialog(GeneralRecycleInfoActivity.this);
+            dialog.setDoneListener(() -> {
+                Toast.makeText(getApplicationContext(), "Saved new materials", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
+
+        binding.moreTrashButton.setOnClickListener((v) -> {
+            Intent intent = new Intent(GeneralRecycleInfoActivity.this, MainCategoryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        });
     }
 
     class PostAsync extends AsyncTask<String, String, JSONObject> {
@@ -71,7 +77,6 @@ public class GeneralRecycleInfoActivity extends AppCompatActivity {
 
         private static final String TAG_SUCCESS = "status";
         private static final String TAG_MESSAGE = "message";
-
 
         @Override
         protected void onPreExecute() {
@@ -121,9 +126,6 @@ public class GeneralRecycleInfoActivity extends AppCompatActivity {
             }
 
             if (json != null) {
-                Toast.makeText(GeneralRecycleInfoActivity.this, json.toString(),
-                        Toast.LENGTH_LONG).show();
-
                 success = json.optInt(TAG_SUCCESS);
                 message = json.optString(TAG_MESSAGE);
 
@@ -148,9 +150,9 @@ public class GeneralRecycleInfoActivity extends AppCompatActivity {
 
         private void PopulateView(RecycleInfoMainComponentResponse recycleInfo) {
             // Main component details
-            nameTextView.setText(recycleInfo.name);
-            materialTextView.setText(recycleInfo.material);
-            categoryTextView.setText(recycleInfo.category);
+            binding.mainComponentName.setText(recycleInfo.name);
+            binding.mainComponentMaterial.setText(recycleInfo.material);
+            binding.mainComponentCategory.setText(recycleInfo.category);
 
             //Other components details
             expandableListTitle = new ArrayList<String>();
@@ -169,84 +171,8 @@ public class GeneralRecycleInfoActivity extends AppCompatActivity {
             }
 
             ((MinorComponentsRecycleInfoExpandableListAdapter)expandableListAdapter).updateAdapter(expandableListTitle, expandableListDetail);
-
-
         }
     }
-
-        class GetAsync extends AsyncTask<String, String, JSONObject> {
-
-            JSONParser jsonParser = new JSONParser();
-
-            private ProgressDialog pDialog;
-
-            private static final String LOGIN_URL = "http://www.nooo";
-
-            private static final String TAG_SUCCESS = "status";
-            private static final String TAG_MESSAGE = "message";
-
-            @Override
-            protected void onPreExecute() {
-                pDialog = new ProgressDialog(GeneralRecycleInfoActivity.this);
-                pDialog.setMessage("Attempting login...");
-                pDialog.setIndeterminate(false);
-                pDialog.setCancelable(true);
-                pDialog.show();
-            }
-
-            @Override
-            protected JSONObject doInBackground(String... args) {
-
-                try {
-
-                    HashMap<String, String> params = new HashMap<>();
-                    params.put("name", args[0]);
-                    params.put("password", args[1]);
-
-                    Log.d("request", "starting");
-
-                    JSONObject json = jsonParser.makeHttpRequest(
-                            LOGIN_URL, "GET", params);
-
-                    if (json != null) {
-                        Log.d("JSON result", json.toString());
-
-                        return json;
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            protected void onPostExecute(JSONObject json) {
-
-                int success = 0;
-                String message = "";
-
-                if (pDialog != null && pDialog.isShowing()) {
-                    pDialog.dismiss();
-                }
-
-                if (json != null) {
-                    Toast.makeText(GeneralRecycleInfoActivity.this, json.toString(),
-                            Toast.LENGTH_LONG).show();
-
-                    success = json.optInt(TAG_SUCCESS);
-                    message = json.optString(TAG_MESSAGE);
-
-                    if (success == 1) {
-                        Log.d("Success!", message);
-                    } else {
-                        Log.d("Failure", message);
-                    }
-                }
-
-            }
-
-        }
 }
 
 

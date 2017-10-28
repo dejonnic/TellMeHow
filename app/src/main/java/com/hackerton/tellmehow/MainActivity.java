@@ -12,10 +12,8 @@ import com.hackerton.tellmehow.databinding.ActivityMainBinding;
 public class MainActivity extends Activity {
     private ActivityMainBinding binding;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 

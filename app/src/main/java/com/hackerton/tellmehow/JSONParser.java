@@ -31,18 +31,21 @@ public class JSONParser {
 
         sbParams = new StringBuilder();
         int i = 0;
-        for (String key : params.keySet()) {
-            try {
-                if (i != 0){
-                    sbParams.append("&");
-                }
-                sbParams.append(key).append("=")
-                        .append(URLEncoder.encode(params.get(key), charset));
 
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+        if(params != null) {
+            for (String key : params.keySet()) {
+                try {
+                    if (i != 0) {
+                        sbParams.append("&");
+                    }
+                    sbParams.append(key).append("=")
+                            .append(URLEncoder.encode(params.get(key), charset));
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                i++;
             }
-            i++;
         }
 
         if (method.equals("POST")) {

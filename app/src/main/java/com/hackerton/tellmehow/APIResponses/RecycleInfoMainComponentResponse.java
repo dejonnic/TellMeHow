@@ -6,7 +6,6 @@ import com.hackerton.tellmehow.APIResponses.RecycleInfoMinorComponentsResponse;
 import java.util.List;
 
 public class RecycleInfoMainComponentResponse {
-
     public String text;
 
     public long id;
