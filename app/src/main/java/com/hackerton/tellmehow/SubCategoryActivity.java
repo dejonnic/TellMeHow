@@ -22,8 +22,13 @@ public class SubCategoryActivity extends Activity {
         binding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(SubCategoryActivity.this, InformationActivity.class);
+                startActivity(intent);
             }
+        });
+
+        binding.labelArea.setOnClickListener((v) -> {
+            finish();
         });
 
         binding.helpButton.setOnClickListener((v) -> {
