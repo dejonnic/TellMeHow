@@ -27,7 +27,7 @@ public class MainCategoryActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView name = (TextView) view.getTag(R.id.text);
                 Intent intent = new Intent(MainCategoryActivity.this, SubCategoryActivity.class);
-                intent.putExtra(CategoryNameKey,name.getText().toString());
+                intent.putExtra(CategoryNameKey, name.getText().toString());
                 startActivity(intent);
             }
         });

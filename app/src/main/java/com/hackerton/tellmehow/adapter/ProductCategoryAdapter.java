@@ -20,14 +20,14 @@ public class ProductCategoryAdapter extends BaseAdapter {
     public ProductCategoryAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
 
-        mItems.add(new Item(1, "Bottle", R.drawable.ic_milkbottle));
-        mItems.add(new Item(2, "Package", R.drawable.ic_package));
-        mItems.add(new Item(3, "Package", R.drawable.ic_package));
-        mItems.add(new Item(4, "Package", R.drawable.ic_package));
-        mItems.add(new Item(5, "Package", R.drawable.ic_package));
-        mItems.add(new Item(6, "Package", R.drawable.ic_package));
-        mItems.add(new Item(7, "Package", R.drawable.ic_package));
-        mItems.add(new Item(8, "Package", R.drawable.ic_package));
+        mItems.add(new Item(1, "Bottle", R.drawable.prod_ic_milkbottle));
+        mItems.add(new Item(2, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(3, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(4, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(5, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(6, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(7, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(8, "Package", R.drawable.prod_ic_package));
     }
 
     @Override

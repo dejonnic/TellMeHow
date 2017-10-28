@@ -22,7 +22,10 @@ public class SubCategoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         Intent myIntent = getIntent();
         String firstKeyName = myIntent.getStringExtra(MainCategoryActivity.CategoryNameKey);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sub_category);
+        binding.label.setText(firstKeyName);
+
         binding.categories.setAdapter(new ProductCategoryAdapter(this));
         binding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
