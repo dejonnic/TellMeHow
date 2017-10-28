@@ -6,7 +6,7 @@ public class RecycleInfoMinorComponentsResponse {
     @SerializedName("name")
     public String name;
 
-    @SerializedName("recycle_info")
+    @SerializedName("recyclinginfomation")
     public String recycleInformation;
 
     @SerializedName("material")
