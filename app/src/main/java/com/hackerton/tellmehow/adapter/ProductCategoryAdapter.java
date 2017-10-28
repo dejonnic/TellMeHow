@@ -20,14 +20,15 @@ public class ProductCategoryAdapter extends BaseAdapter {
     public ProductCategoryAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
 
-        mItems.add(new Item(1, "Bottle", R.drawable.prod_ic_milkbottle));
-        mItems.add(new Item(2, "Package", R.drawable.prod_ic_package));
-        mItems.add(new Item(3, "Package", R.drawable.prod_ic_package));
-        mItems.add(new Item(4, "Package", R.drawable.prod_ic_package));
-        mItems.add(new Item(5, "Package", R.drawable.prod_ic_package));
-        mItems.add(new Item(6, "Package", R.drawable.prod_ic_package));
-        mItems.add(new Item(7, "Package", R.drawable.prod_ic_package));
-        mItems.add(new Item(8, "Package", R.drawable.prod_ic_package));
+        mItems.add(new Item(1, "Bottles", R.drawable.prod_ic_milkbottle));
+        mItems.add(new Item(2, "Cans", R.drawable.prod_ic_can));
+        mItems.add(new Item(3, "Packaging", R.drawable.prod_ic_package));
+        mItems.add(new Item(4, "Household", R.drawable.prod_ic_household));
+        mItems.add(new Item(5, "Wearables", R.drawable.prod_ic_wearables));
+        mItems.add(new Item(6, "Office Goods", R.drawable.prod_ic_office_goods));
+        mItems.add(new Item(7, "Food Waste", R.drawable.prod_ic_food_waste));
+        mItems.add(new Item(8, "Electronics", R.drawable.prod_ic_electronics));
+        mItems.add(new Item(98, "Batteries", R.drawable.prod_ic_batteries));
     }
 
     @Override
