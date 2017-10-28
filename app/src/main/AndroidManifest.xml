@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hackerton.tellmehow">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,7 @@
         <activity android:name=".SubCategoryActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".GeneralRecycleInfoActivity"/>
+        <activity android:name=".ProductRecycleInfoActivity"/>
     </application>
 
 </manifest>
