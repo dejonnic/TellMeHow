@@ -22,8 +22,6 @@ public class CategoryRequester extends AsyncTask<Void, Void, JSONObject> {
     private ProgressDialog pDialog;
 
     private static final String BASE_URL = "http://128.199.69.81:8000/api/v1/category/material/";
-    private static final String TAG_SUCCESS = "status";
-    private static final String TAG_MESSAGE = "message";
 
     public CategoryRequester(Context activity, int categoryId, OnCompleteListener onCompleteListener){
         this.activity = activity;
@@ -35,7 +33,7 @@ public class CategoryRequester extends AsyncTask<Void, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         pDialog = new ProgressDialog(activity);
-        pDialog.setMessage("Attempting login...");
+        pDialog.setMessage("Catching data...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(true);
         pDialog.show();
