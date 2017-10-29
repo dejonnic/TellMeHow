@@ -28,8 +28,7 @@ public class ProductCategoryAdapter extends BaseAdapter {
         mItems.add(new Item(4, "Household", R.drawable.prod_ic_household));
         mItems.add(new Item(5, "Wearables", R.drawable.prod_ic_wearables));
         mItems.add(new Item(6, "Office Goods", R.drawable.prod_ic_office_goods));
-        mItems.add(new Item(7, "Food Waste", R.drawable.prod_ic_food_waste));
-        mItems.add(new Item(8, "Electronics", R.drawable.prod_ic_electronics));
+        mItems.add(new Item(7, "Other", R.drawable.prod_ic_null));
     }
 
     public ProductCategoryAdapter(Context context, List<Material> materials, int categoryId) {

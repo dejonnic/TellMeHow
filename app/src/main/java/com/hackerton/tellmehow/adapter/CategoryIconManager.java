@@ -25,8 +25,12 @@ public class CategoryIconManager {
                 return R.drawable.prod_ic_household_light;
             case 8:
                 return R.drawable.prod_ic_wearable_cloth;
-
+            case 9:
                 return R.drawable.prod_ic_electronic;
+            case 11:
+                return R.drawable.prod_ic_electronic;
+            case 12:
+                    return R.drawable.prod_ic_food_waste;
             default:
                 return R.drawable.prod_ic_null;
         }
