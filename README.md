@@ -2,7 +2,7 @@
 
 Ottoke (*Tell me how* in Korean) is an Android based application that raises recycling awareness.
 
-![Splash](Pictures/SplashScreenOttoke.jpeg)
+<img src="Pictures/SplashScreenOttoke.jpeg" height="300">
 
 # Features
 ## Core feature
@@ -14,7 +14,7 @@ The main feature is to provide recycling information for any kind of waste, in o
 ## Product identification by barcode
 The user can scan the barcode of a product to get more specific recycling information. It uses the library [Zxing](https://github.com/zxing/zxing "Zxing library").
 
-![ProductScanning](Pictures/BarCode.jpeg)
+<img src="Pictures/BarCode.jpeg" width="300">
 
 ## Help engine
 In case of trouble, the user is redirected to Google'es search engine.
